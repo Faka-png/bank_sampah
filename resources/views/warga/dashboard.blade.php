@@ -19,7 +19,7 @@
         <div>
             <!-- Logo Brand -->
             <div class="d-flex align-items-center gap-2 mb-5 text-white fw-bolder fs-5" style="letter-spacing: 1px;">
-                <span class="text-success">🍃</span> HARVEST
+                <span class="text-success">🍃</span> Bank Sampah
             </div>
             
             <!-- Menu Navigasi Nasabah -->
@@ -34,9 +34,6 @@
 
         <!-- Bagian Bawah Sidebar (Info App + Logout) -->
         <div>
-            <div class="p-3 text-center rounded-3 mb-4" style="background-color: #153527;">
-                <p class="small text-white-50 mb-0">Sistem Bank Sampah v2.0</p>
-            </div>
             <a class="d-flex align-items-center gap-2 px-2 text-decoration-none fw-bold text-danger" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">
                 <span>🚪</span> LOG OUT
             </a>

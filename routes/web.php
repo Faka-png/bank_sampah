@@ -21,6 +21,8 @@ Route::middleware(['auth.role:admin'])->prefix('admin')->group(function () {
     Route::get('/transaksi/{id}', [AdminController::class, 'transaksiDetail'])->name('admin.transaksi.detail');
     Route::get('/warga', [AdminController::class, 'wargaIndex'])->name('admin.warga');
     Route::post('/warga', [AdminController::class, 'wargaStore'])->name('admin.warga.store');
+    Route::delete('/admin/warga/delete/{id}', [AdminController::class, 'wargaDelete'])->name('admin.warga.delete');
+    Route::delete('/admin/sampah/delete/{id}', [AdminController::class, 'sampahDelete'])->name('admin.sampah.delete');
 });
 
 // Warga / Nasabah Routes Area

@@ -116,4 +116,20 @@ public function wargaStore(Request $request)
 
     return redirect()->route('admin.warga')->with('success', 'Data warga baru telah ditambahkan.');
 }
+
+public function wargaDelete($id)
+{
+    $warga = Warga::findOrFail($id);
+    $warga->delete();
+
+    return redirect()->route('admin.warga')->with('success', 'Data warga berhasil dihapus dari sistem.');
+}
+
+public function sampahDelete($id)
+{
+    $sampah = JenisSampah::findOrFail($id);
+    $sampah->delete();
+
+    return redirect()->route('admin.sampah')->with('success', 'Jenis sampah berhasil dihapus.');
+}
 }

@@ -11,5 +11,8 @@ class JenisSampah extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    // PERBAIKAN: Matikan fitur otomatis timestamps Laravel
+    public $timestamps = false;
+
     protected $fillable = ['id_jenis', 'nama_sampah', 'harga_perkg'];
 }

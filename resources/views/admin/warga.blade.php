@@ -98,51 +98,60 @@
             </div>
         @endif
 
-        <!-- Card Tabel Data Warga -->
-        <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
-                <div>
-                    <h4 class="fw-bold text-dark m-0">Daftar Warga / Nasabah</h4>
-                    <small class="text-muted">Kelola data profil, alamat, dan informasi kontak nasabah aktif</small>
-                </div>
-                <button type="button" class="btn text-white shadow-sm btn-sm px-4 py-2 rounded-pill fw-medium" style="background-color: #0c231a;" data-bs-toggle="modal" data-bs-target="#modalWarga">
-                    + Tambah Warga
-                </button>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead>
-                        <tr class="text-muted small" style="border-bottom: 2px solid #f4f7f5;">
-                            <th class="pb-3">ID WARGA</th>
-                            <th class="pb-3">NAMA LENGKAP</th>
-                            <th class="pb-3">ALAMAT</th>
-                            <th class="pb-3">NO. HP</th>
-                            <th class="pb-3">EMAIL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($warga as $row)
-                            <tr style="border-bottom: 1px solid #f4f7f5;">
-                                <td class="py-3">
-                                    <span class="badge px-3 py-2 rounded-3 text-dark bg-light fw-medium" style="border: 1px solid #e5e7eb;">
-                                        {{ $row->id_warga }}
-                                    </span>
-                                </td>
-                                <td class="py-3 fw-semibold text-dark">{{ $row->nama }}</td>
-                                <td class="py-3 text-secondary">{{ $row->alamat }}</td>
-                                <td class="py-3 text-dark fw-medium">{{ $row->no_hp }}</td>
-                                <td class="py-3 text-secondary">{{ $row->email }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center text-muted py-5">Belum ada data warga.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+       <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+        <div>
+            <h4 class="fw-bold text-dark m-0">Daftar Warga / Nasabah</h4>
+            <small class="text-muted">Kelola data profil, alamat, dan informasi kontak nasabah aktif</small>
         </div>
+        <button type="button" class="btn text-white shadow-sm btn-sm px-4 py-2 rounded-pill fw-medium" style="background-color: #0c231a;" data-bs-toggle="modal" data-bs-target="#modalWarga">
+            + Tambah Warga
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr class="text-muted small" style="border-bottom: 2px solid #f4f7f5;">
+                    <th class="pb-3">ID WARGA</th>
+                    <th class="pb-3">NAMA LENGKAP</th>
+                    <th class="pb-3">ALAMAT</th>
+                    <th class="pb-3">NO. HP</th>
+                    <th class="pb-3">EMAIL</th>
+                    <th class="pb-3 text-center">AKSI</th> </tr>
+            </thead>
+            <tbody>
+                @forelse($warga as $row)
+                    <tr style="border-bottom: 1px solid #f4f7f5;">
+                        <td class="py-3">
+                            <span class="badge px-3 py-2 rounded-3 text-dark bg-light fw-medium" style="border: 1px solid #e5e7eb;">
+                                {{ $row->id_warga }}
+                            </span>
+                        </td>
+                        <td class="py-3 fw-semibold text-dark">{{ $row->nama }}</td>
+                        <td class="py-3 text-secondary">{{ $row->alamat }}</td>
+                        <td class="py-3 text-dark fw-medium">{{ $row->no_hp }}</td>
+                        <td class="py-3 text-secondary">{{ $row->email }}</td>
+                        
+                        <td class="py-3 text-center">
+                            <form action="{{ route('admin.warga.delete', $row->id_warga) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus warga {{ $row->nama }}? Semua data riwayat transaksi terkait mungkin akan ikut terpengaruh.')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-light text-danger rounded-3 p-2" title="Hapus Data" style="border: 1px solid #f3f4f6;">
+                                    🗑️ <span class="small fw-bold d-none d-md-inline-block ms-1">Hapus</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-5">Belum ada data warga.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
 
     </div>
 </div>

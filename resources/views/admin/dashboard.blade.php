@@ -75,7 +75,6 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <h2 class="fw-bolder text-dark mb-0">{{ number_format($hitung_berat, 1) }} <span class="fs-5 text-muted fw-normal">Kg</span></h2>
-                            <small class="text-muted d-block mt-1">9.35 Jam operasional</small>
                         </div>
                         
                         @php $derajat_progress = min(($hitung_berat / 500) * 360, 360); @endphp
@@ -87,10 +86,6 @@
                                 <small class="text-muted" style="font-size: 9px;">Target</small>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between text-muted small">
-                        <span>♻️ 0 Km/h Rute</span>
-                        <span>💧 86% Kondisi</span>
                     </div>
                 </div>
             </div>
@@ -105,9 +100,6 @@
                         <h3 class="fw-bolder text-dark mb-1">Rp {{ number_format($hitung_saldo, 0, ',', '.') }}</h3>
                         <p class="text-muted small mb-0">Total distribusi dana simpanan seluruh nasabah aktif terdaftar.</p>
                     </div>
-                    <div class="progress mt-4" style="height: 6px; border-radius: 10px;">
-                        <div class="progress-bar" role="progressbar" style="width: 75%; background-color: #0c231a;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
                 </div>
             </div>
 
@@ -119,7 +111,7 @@
                         <p class="text-white-50 small mb-0">Sistem manajemen monitoring dan pencatatan sampah real-time.</p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center pt-3 border-top border-secondary mt-4">
-                        <small class="text-white-50">Sistem Aktif v2.0</small>
+                        <small class="text-white-50">Nasabah Aktif</small>
                         <a href="{{ route('admin.warga') }}" class="btn btn-light btn-sm text-success fw-bold px-3 rounded-pill" style="font-size: 12px;">Lihat Warga</a>
                     </div>
                 </div>

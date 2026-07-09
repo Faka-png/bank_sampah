@@ -79,42 +79,52 @@
             </div>
         @endif
 
-        <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
-                <div>
-                    <h4 class="fw-bold text-dark m-0">Daftar Jenis Sampah</h4>
-                    <small class="text-muted">Kelola jenis kategori sampah dan batas harga tukar per kilogram</small>
-                </div>
-                <button type="button" class="btn text-white shadow-sm btn-sm px-4 py-2 rounded-pill fw-medium" style="background-color: #0c231a;" data-bs-toggle="modal" data-bs-target="#modalSampah">
-                    + Tambah Jenis Sampah
-                </button>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead>
-                        <tr class="text-muted small" style="border-bottom: 2px solid #f4f7f5;">
-                            <th class="pb-3">ID JENIS</th>
-                            <th class="pb-3">NAMA SAMPAH</th>
-                            <th class="pb-3">HARGA / KG</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($jenis_sampah as $row)
-                            <tr style="border-bottom: 1px solid #f4f7f5;">
-                                <td class="py-3"><span class="badge px-3 py-2 rounded-3 text-dark bg-light fw-medium" style="border: 1px solid #e5e7eb;">{{ $row->id_jenis }}</span></td>
-                                <td class="py-3 fw-semibold text-dark">{{ $row->nama_sampah }}</td>
-                                <td class="py-3 fw-bold" style="color: #122c20;">Rp {{ number_format($row->harga_perkg, 0, ',', '.') }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3" class="text-center text-muted py-5">Belum ada data jenis sampah.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+       <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+        <div>
+            <h4 class="fw-bold text-dark m-0">Daftar Jenis Sampah</h4>
+            <small class="text-muted">Kelola jenis kategori sampah dan batas harga tukar per kilogram</small>
         </div>
+        <button type="button" class="btn text-white shadow-sm btn-sm px-4 py-2 rounded-pill fw-medium" style="background-color: #0c231a;" data-bs-toggle="modal" data-bs-target="#modalSampah">
+            + Tambah Jenis Sampah
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr class="text-muted small" style="border-bottom: 2px solid #f4f7f5;">
+                    <th class="pb-3">ID JENIS</th>
+                    <th class="pb-3">NAMA SAMPAH</th>
+                    <th class="pb-3">HARGA / KG</th>
+                    <th class="pb-3 text-center">AKSI</th> </tr>
+            </thead>
+            <tbody>
+                @forelse($jenis_sampah as $row)
+                    <tr style="border-bottom: 1px solid #f4f7f5;">
+                        <td class="py-3"><span class="badge px-3 py-2 rounded-3 text-dark bg-light fw-medium" style="border: 1px solid #e5e7eb;">{{ $row->id_jenis }}</span></td>
+                        <td class="py-3 fw-semibold text-dark">{{ $row->nama_sampah }}</td>
+                        <td class="py-3 fw-bold" style="color: #122c20;">Rp {{ number_format($row->harga_perkg, 0, ',', '.') }}</td>
+                        
+                        <td class="py-3 text-center">
+                            <form action="{{ route('admin.sampah.delete', $row->id_jenis) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori {{ $row->nama_sampah }}?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-light text-danger rounded-3 p-2" title="Hapus Jenis Sampah" style="border: 1px solid #f3f4f6;">
+                                    🗑️ <span class="small fw-bold d-none d-md-inline-block ms-1">Hapus</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-5">Belum ada data jenis sampah.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
     </div>
 </div>
 

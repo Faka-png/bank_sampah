@@ -11,7 +11,11 @@ class Warga extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['id_warga', 'nama', 'alamat', 'email', 'password'];
+    // PERBAIKAN 1: Matikan fitur otomatis timestamps Laravel
+    public $timestamps = false;
+
+    // PERBAIKAN 2: Tambahkan 'no_hp' ke dalam array agar bisa disimpan ke database
+    protected $fillable = ['id_warga', 'nama', 'alamat', 'no_hp', 'email', 'password'];
 
     public function transaksi()
     {

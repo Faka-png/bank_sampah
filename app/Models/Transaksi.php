@@ -11,6 +11,9 @@ class Transaksi extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    // PERBAIKAN: Matikan fitur otomatis timestamps Laravel
+    public $timestamps = false;
+
     protected $fillable = ['id_transaksi', 'id_warga', 'tanggal', 'total_berat', 'total_saldo'];
 
     public function warga()
