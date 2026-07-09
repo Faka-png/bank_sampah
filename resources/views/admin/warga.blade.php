@@ -11,61 +11,52 @@
 
 <div class="d-flex min-vh-100">
 
-    <!-- 1. SIDEBAR KIRI (Sama Persis dengan Halaman Lainnya) -->
     <div class="d-none d-lg-flex flex-column justify-content-between p-4 position-fixed top-0 bottom-0 start-0" style="width: 260px; background-color: #0c231a; z-index: 1000;">
         <div>
-            <!-- Logo Brand -->
             <div class="d-flex align-items-center gap-2 mb-5 text-white fw-bolder fs-5" style="letter-spacing: 1px;">
-                <span class="text-success">🍃</span> Bank Sampah
+                Bank Sampah
             </div>
             
-            <!-- Menu Navigasi (State 'active' berada di Data Warga) -->
             <ul class="nav flex-column gap-1">
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.dashboard') }}">
-                        <span class="fs-5">🎛️</span> Dashboard
+                        Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white" style="background-color: #153527; text-decoration: none;" href="{{ route('admin.warga') }}">
-                        <span class="fs-5">👥</span> Data Warga
+                        Data Warga
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.sampah') }}">
-                        <span class="fs-5">♻️</span> Jenis Sampah
+                        Jenis Sampah
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.transaksi') }}">
-                        <span class="fs-5">💸</span> Transaksi
+                        Transaksi
                     </a>
                 </li>
             </ul>
         </div>
 
-        <!-- Bagian Bawah Sidebar (Form Aksi + Logout) -->
         <div>
-            <a class="d-flex align-items-center gap-2 px-2 text-decoration-none fw-bold text-danger" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">
-                <span>🚪</span> LOG OUT
+            <a class="d-flex align-items-center gap-2 px-2 text-decoration-none fw-bold" style="color: #8da296;" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">
+                LOG OUT
             </a>
         </div>
     </div>
 
-    <!-- 2. AREA KONTEN UTAMA (DI SEBELAH KANAN SIDEBAR) -->
     <div class="flex-grow-1 p-4 p-md-5" style="margin-left: 260px;">
         
-        <!-- Topbar: Kolom Pencarian & Info Akun Admin -->
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
             <div>
-                <h3 class="fw-bold text-dark m-0">👋 Halo, {{ session('nama_admin') }}</h3>
+                <h3 class="fw-bold text-dark m-0">Halo, {{ session('nama_admin') }}</h3>
                 <small class="text-muted">Selamat datang di panel tabungan lingkungan Anda</small>
             </div>
             
-            <!-- Notifikasi & Profile Ringkas -->
             <div class="d-flex align-items-center justify-content-end gap-4">
-                <span class="fs-5" style="cursor: pointer;">💬</span>
-                <span class="fs-5" style="cursor: pointer;">🔔</span>
                 <div class="d-flex align-items-center gap-2">
                     <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px; background-color: #0c231a;">
                         {{ strtoupper(substr(session('nama_admin'), 0, 1)) }}
@@ -78,7 +69,6 @@
             </div>
         </div>
 
-        <!-- Notifikasi Error Validasi -->
         @if ($errors->any())
             <div class="alert alert-danger border-0 shadow-sm alert-dismissible fade show rounded-4 mb-4" role="alert">
                 <ul class="m-0 small fw-medium">
@@ -90,7 +80,6 @@
             </div>
         @endif
 
-        <!-- Notifikasi Berhasil -->
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
                 <strong>Berhasil!</strong> {{ session('success') }}
@@ -98,65 +87,65 @@
             </div>
         @endif
 
-       <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
-    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
-        <div>
-            <h4 class="fw-bold text-dark m-0">Daftar Warga / Nasabah</h4>
-            <small class="text-muted">Kelola data profil, alamat, dan informasi kontak nasabah aktif</small>
+        <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+                <div>
+                    <h4 class="fw-bold text-dark m-0">Daftar Warga / Nasabah</h4>
+                    <small class="text-muted">Kelola data profil, alamat, dan informasi kontak nasabah aktif</small>
+                </div>
+                <button type="button" class="btn text-white shadow-sm btn-sm px-4 py-2 rounded-pill fw-medium" style="background-color: #0c231a;" data-bs-toggle="modal" data-bs-target="#modalWarga">
+                    + Tambah Warga
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="text-muted small" style="border-bottom: 2px solid #f4f7f5;">
+                            <th class="pb-3">ID WARGA</th>
+                            <th class="pb-3">NAMA LENGKAP</th>
+                            <th class="pb-3">ALAMAT</th>
+                            <th class="pb-3">NO. HP</th>
+                            <th class="pb-3">EMAIL</th>
+                            <th class="pb-3 text-center">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($warga as $row)
+                            <tr style="border-bottom: 1px solid #f4f7f5;">
+                                <td class="py-3">
+                                    <span class="badge px-3 py-2 rounded-3 text-dark bg-light fw-medium" style="border: 1px solid #e5e7eb;">
+                                        {{ $row->id_warga }}
+                                    </span>
+                                </td>
+                                <td class="py-3 fw-semibold text-dark">{{ $row->nama }}</td>
+                                <td class="py-3 text-secondary">{{ $row->alamat }}</td>
+                                <td class="py-3 text-dark fw-medium">{{ $row->no_hp }}</td>
+                                <td class="py-3 text-secondary">{{ $row->email }}</td>
+                                
+                                <td class="py-3 text-center">
+                                    <form action="{{ route('admin.warga.delete', $row->id_warga) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus warga {{ $row->nama }}? Semua data riwayat transaksi terkait mungkin akan ikut terpengaruh.')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-light text-danger rounded-3 p-2" title="Hapus Data" style="border: 1px solid #f3f4f6;">
+                                            <span class="small fw-bold d-none d-md-inline-block ms-1">Hapus</span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-5">Belum ada data warga.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <button type="button" class="btn text-white shadow-sm btn-sm px-4 py-2 rounded-pill fw-medium" style="background-color: #0c231a;" data-bs-toggle="modal" data-bs-target="#modalWarga">
-            + Tambah Warga
-        </button>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-            <thead>
-                <tr class="text-muted small" style="border-bottom: 2px solid #f4f7f5;">
-                    <th class="pb-3">ID WARGA</th>
-                    <th class="pb-3">NAMA LENGKAP</th>
-                    <th class="pb-3">ALAMAT</th>
-                    <th class="pb-3">NO. HP</th>
-                    <th class="pb-3">EMAIL</th>
-                    <th class="pb-3 text-center">AKSI</th> </tr>
-            </thead>
-            <tbody>
-                @forelse($warga as $row)
-                    <tr style="border-bottom: 1px solid #f4f7f5;">
-                        <td class="py-3">
-                            <span class="badge px-3 py-2 rounded-3 text-dark bg-light fw-medium" style="border: 1px solid #e5e7eb;">
-                                {{ $row->id_warga }}
-                            </span>
-                        </td>
-                        <td class="py-3 fw-semibold text-dark">{{ $row->nama }}</td>
-                        <td class="py-3 text-secondary">{{ $row->alamat }}</td>
-                        <td class="py-3 text-dark fw-medium">{{ $row->no_hp }}</td>
-                        <td class="py-3 text-secondary">{{ $row->email }}</td>
-                        
-                        <td class="py-3 text-center">
-                            <form action="{{ route('admin.warga.delete', $row->id_warga) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus warga {{ $row->nama }}? Semua data riwayat transaksi terkait mungkin akan ikut terpengaruh.')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-light text-danger rounded-3 p-2" title="Hapus Data" style="border: 1px solid #f3f4f6;">
-                                    🗑️ <span class="small fw-bold d-none d-md-inline-block ms-1">Hapus</span>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" class="text-center text-muted py-5">Belum ada data warga.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-</div>
 
     </div>
 </div>
 
-<!-- Modal Form Tambah Warga -->
 <div class="modal fade" id="modalWarga" data-bs-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 rounded-4 shadow-lg">

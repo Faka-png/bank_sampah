@@ -2,8 +2,7 @@
 @section('title', 'Dashboard Nasabah')
 @section('content')
 
-<!-- Menyisipkan font Inter agar konsisten dengan tema admin -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
 <style>
     body {
@@ -12,48 +11,39 @@
     }
 </style>
 
-<div class="d-flex min-vh-100" style="margin: -24px;"> <!-- Negasi margin jika layout bawaan app.blade memiliki padding -->
+<div class="d-flex min-vh-100" style="margin: -24px;">
 
-    <!-- 1. SIDEBAR KIRI NASABAH -->
     <div class="d-none d-lg-flex flex-column justify-content-between p-4 position-fixed top-0 bottom-0 start-0" style="width: 260px; background-color: #0c231a; z-index: 1000;">
         <div>
-            <!-- Logo Brand -->
             <div class="d-flex align-items-center gap-2 mb-5 text-white fw-bolder fs-5" style="letter-spacing: 1px;">
-                <span class="text-success">🍃</span> Bank Sampah
+                Bank Sampah
             </div>
             
-            <!-- Menu Navigasi Nasabah -->
             <ul class="nav flex-column gap-1">
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white" style="background-color: #153527; text-decoration: none;" href="#">
-                        <span class="fs-5">🎛️</span> Dashboard Nasabah
+                        Dashboard Nasabah
                     </a>
                 </li>
             </ul>
         </div>
 
-        <!-- Bagian Bawah Sidebar (Info App + Logout) -->
         <div>
-            <a class="d-flex align-items-center gap-2 px-2 text-decoration-none fw-bold text-danger" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">
-                <span>🚪</span> LOG OUT
+            <a class="d-flex align-items-center gap-2 px-2 text-decoration-none fw-bold" style="color: #8da296;" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">
+                LOG OUT
             </a>
         </div>
     </div>
 
-    <!-- 2. AREA KONTEN UTAMA (KANAN) -->
     <div class="flex-grow-1 p-4 p-md-5" style="margin-left: 260px;">
         
-        <!-- Topbar: Sapaan Nasabah & Info Akun -->
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
             <div>
-                <h3 class="fw-bold text-dark m-0">👋 Halo, {{ session('nama_warga') }}</h3>
+                <h3 class="fw-bold text-dark m-0">Halo, {{ session('nama_warga') }}</h3>
                 <small class="text-muted">Selamat datang di panel tabungan lingkungan Anda</small>
             </div>
             
-            <!-- Notifikasi & Profile Ringkas -->
             <div class="d-flex align-items-center justify-content-end gap-4">
-                <span class="fs-5" style="cursor: pointer;">💬</span>
-                <span class="fs-5" style="cursor: pointer;">🔔</span>
                 <div class="d-flex align-items-center gap-2">
                     <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px; background-color: #0c231a;">
                         {{ strtoupper(substr(session('nama_warga'), 0, 1)) }}
@@ -66,7 +56,6 @@
             </div>
         </div>
 
-        <!-- Alert Sistem -->
         @if(session('success'))
             <div class="alert alert-success border-0 shadow-sm rounded-4 mb-4">{{ session('success') }}</div>
         @endif
@@ -78,26 +67,21 @@
             </div>
         @endif
 
-        <!-- Widget Ringkasan Informasi (Cards) -->
         <div class="row g-4 mb-5">
-            <!-- Card Total Tabungan -->
             <div class="col-md-6">
                 <div class="card border-0 rounded-4 p-4 shadow-sm text-white" style="background-color: #0c231a;">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <span class="text-white-50 fw-medium">Total Tabungan Anda</span>
-                        <span class="fs-4">💰</span>
                     </div>
                     <h2 class="fw-extrabold m-0">Rp {{ number_format($t_saldo, 0, ',', '.') }}</h2>
                     <small class="text-success fw-medium d-block mt-2">✓ Saldo siap ditukarkan/dicairkan</small>
                 </div>
             </div>
             
-            <!-- Card Total Sampah -->
             <div class="col-md-6">
                 <div class="card border-0 rounded-4 p-4 shadow-sm bg-white border">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <span class="text-muted fw-medium">Total Sampah Disetor</span>
-                        <span class="fs-4">♻️</span>
                     </div>
                     <h2 class="fw-extrabold text-dark m-0">{{ number_format($t_berat, 2) }} <span class="fs-5 fw-normal text-muted">Kg</span></h2>
                     <small class="text-muted d-block mt-2">Kontribusi hijau untuk bumi</small>
@@ -105,7 +89,6 @@
             </div>
         </div>
 
-        <!-- Card Tabel Riwayat Setoran -->
         <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
                 <div>
@@ -152,7 +135,6 @@
     </div>
 </div>
 
-<!-- Modal Form Setor Sampah Mandiri -->
 <div class="modal fade" id="modalSetorMandi" data-bs-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 rounded-4 shadow-lg">

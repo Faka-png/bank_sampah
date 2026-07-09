@@ -11,61 +11,52 @@
 
 <div class="d-flex min-vh-100">
 
-    <!-- 1. SIDEBAR KIRI (Sama Persis dengan Halaman Lainnya) -->
     <div class="d-none d-lg-flex flex-column justify-content-between p-4 position-fixed top-0 bottom-0 start-0" style="width: 260px; background-color: #0c231a; z-index: 1000;">
         <div>
-            <!-- Logo Brand -->
             <div class="d-flex align-items-center gap-2 mb-5 text-white fw-bolder fs-5" style="letter-spacing: 1px;">
-                <span class="text-success">🍃</span> Bank Sampah
+                Bank Sampah
             </div>
             
-            <!-- Menu Navigasi (State 'active' berada di Transaksi) -->
             <ul class="nav flex-column gap-1">
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.dashboard') }}">
-                        <span class="fs-5">🎛️</span> Dashboard
+                        Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.warga') }}">
-                        <span class="fs-5">👥</span> Data Warga
+                        Data Warga
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.sampah') }}">
-                        <span class="fs-5">♻️</span> Jenis Sampah
+                        Jenis Sampah
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white" style="background-color: #153527; text-decoration: none;" href="{{ route('admin.transaksi') }}">
-                        <span class="fs-5">💸</span> Transaksi
+                        Transaksi
                     </a>
                 </li>
             </ul>
         </div>
 
-        <!-- Bagian Bawah Sidebar (Form Aksi + Logout) -->
         <div>
-            <a class="d-flex align-items-center gap-2 px-2 text-decoration-none fw-bold text-danger" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">
-                <span>🚪</span> LOG OUT
+            <a class="d-flex align-items-center gap-2 px-2 text-decoration-none fw-bold" style="color: #8da296;" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">
+                LOG OUT
             </a>
         </div>
     </div>
 
-    <!-- 2. AREA KONTEN UTAMA (DI SEBELAH KANAN SIDEBAR) -->
     <div class="flex-grow-1 p-4 p-md-5" style="margin-left: 260px;">
         
-        <!-- Topbar: Kolom Pencarian & Info Akun Admin -->
          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
             <div>
-                <h3 class="fw-bold text-dark m-0">👋 Halo, {{ session('nama_admin') }}</h3>
+                <h3 class="fw-bold text-dark m-0">Halo, {{ session('nama_admin') }}</h3>
                 <small class="text-muted">Selamat datang di panel tabungan lingkungan Anda</small>
             </div>
             
-            <!-- Notifikasi & Profile Ringkas -->
             <div class="d-flex align-items-center justify-content-end gap-4">
-                <span class="fs-5" style="cursor: pointer;">💬</span>
-                <span class="fs-5" style="cursor: pointer;">🔔</span>
                 <div class="d-flex align-items-center gap-2">
                     <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px; background-color: #0c231a;">
                         {{ strtoupper(substr(session('nama_admin'), 0, 1)) }}
@@ -78,7 +69,6 @@
             </div>
         </div>
 
-        <!-- Notifikasi Sukses -->
         @if(session('status') == 'sukses')
             <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
                 <strong>Berhasil!</strong> Transaksi baru telah berhasil disimpan.
@@ -86,7 +76,6 @@
             </div>
         @endif
 
-        <!-- Card Tabel Riwayat Transaksi -->
         <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
                 <div>
