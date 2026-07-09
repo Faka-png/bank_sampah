@@ -2,63 +2,113 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jenis Sampah - Bank Sampah</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 </head>
-<body class="bg-light">
-    <!-- Navbar -->
-   <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm mb-4">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">🍃 Bank Sampah</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.warga') }}">Data Warga</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="{{ route('admin.sampah') }}">Jenis Sampah</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.transaksi') }}">Transaksi</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-danger btn-sm text-white px-3 ms-lg-2" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">Logout</a>
-                    </li>
-                </ul>
+<body style="background-color: #f4f7f5; font-family: 'Inter', sans-serif;">
+
+<div class="d-flex min-vh-100">
+
+    <div class="d-none d-lg-flex flex-column justify-content-between p-4 position-fixed top-0 bottom-0 start-0" style="width: 260px; background-color: #0c231a; z-index: 1000;">
+        <div>
+            <div class="d-flex align-items-center gap-2 mb-5 text-white fw-bolder fs-5" style="letter-spacing: 1px;">
+                <span class="text-success">🍃</span> Bank Sampah
+            </div>
+            
+            <ul class="nav flex-column gap-1">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.dashboard') }}">
+                        <span class="fs-5">🎛️</span> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.warga') }}">
+                        <span class="fs-5">👥</span> Data Warga
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white" style="background-color: #153527; text-decoration: none;" href="{{ route('admin.sampah') }}">
+                        <span class="fs-5">♻️</span> Jenis Sampah
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium text-white-50" style="text-decoration: none;" href="{{ route('admin.transaksi') }}">
+                        <span class="fs-5">💸</span> Transaksi
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <a class="d-flex align-items-center gap-2 px-2 text-decoration-none fw-bold text-danger" href="{{ route('logout') }}" onclick="return confirm('Apakah Anda yakin ingin logout?')">
+                <span>🚪</span> LOG OUT
+            </a>
+        </div>
+    </div>
+
+    <div class="flex-grow-1 p-4 p-md-5" style="margin-left: 260px;">
+        
+         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
+            <div>
+                <h3 class="fw-bold text-dark m-0">👋 Halo, {{ session('nama_admin') }}</h3>
+                <small class="text-muted">Selamat datang di panel tabungan lingkungan Anda</small>
+            </div>
+            
+            <!-- Notifikasi & Profile Ringkas -->
+            <div class="d-flex align-items-center justify-content-end gap-4">
+                <span class="fs-5" style="cursor: pointer;">💬</span>
+                <span class="fs-5" style="cursor: pointer;">🔔</span>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px; background-color: #0c231a;">
+                        {{ strtoupper(substr(session('nama_admin'), 0, 1)) }}
+                    </div>
+                    <div>
+                        <p class="mb-0 fw-bold lh-1 text-dark" style="font-size: 14px;">{{ session('nama_admin') }}</p>
+                        <small class="text-muted" style="font-size: 12px;">Anggota Nasabah Aktif</small>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
 
-    <div class="container">
         @if(session('status') == 'sukses')
-            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert">
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
                 <strong>Berhasil!</strong> Jenis sampah baru berhasil ditambahkan.
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
 
-        <div class="card border-0 shadow-sm p-4">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-success fw-bold m-0">Daftar Jenis Sampah</h4>
-                <button type="button" class="btn btn-success shadow-sm btn-sm" data-bs-toggle="modal" data-bs-target="#modalSampah">
+        <div class="card border-0 rounded-4 p-4 shadow-sm bg-white">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+                <div>
+                    <h4 class="fw-bold text-dark m-0">Daftar Jenis Sampah</h4>
+                    <small class="text-muted">Kelola jenis kategori sampah dan batas harga tukar per kilogram</small>
+                </div>
+                <button type="button" class="btn text-white shadow-sm btn-sm px-4 py-2 rounded-pill fw-medium" style="background-color: #0c231a;" data-bs-toggle="modal" data-bs-target="#modalSampah">
                     + Tambah Jenis Sampah
                 </button>
             </div>
 
             <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle">
-                    <thead class="table-success">
-                        <tr>
-                            <th>ID Jenis</th>
-                            <th>Nama Sampah</th>
-                            <th>Harga / Kg</th>
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="text-muted small" style="border-bottom: 2px solid #f4f7f5;">
+                            <th class="pb-3">ID JENIS</th>
+                            <th class="pb-3">NAMA SAMPAH</th>
+                            <th class="pb-3">HARGA / KG</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($jenis_sampah as $row)
-                            <tr>
-                                <td><span class="badge bg-secondary">{{ $row->id_jenis }}</span></td>
-                                <td class="fw-semibold">{{ $row->nama_sampah }}</td>
-                                <td class="text-success fw-bold">Rp {{ number_format($row->harga_perkg, 0, ',', '.') }}</td>
+                            <tr style="border-bottom: 1px solid #f4f7f5;">
+                                <td class="py-3"><span class="badge px-3 py-2 rounded-3 text-dark bg-light fw-medium" style="border: 1px solid #e5e7eb;">{{ $row->id_jenis }}</span></td>
+                                <td class="py-3 fw-semibold text-dark">{{ $row->nama_sampah }}</td>
+                                <td class="py-3 fw-bold" style="color: #122c20;">Rp {{ number_format($row->harga_perkg, 0, ',', '.') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="text-center text-muted py-3">Belum ada data jenis sampah.</td>
+                                <td colspan="3" class="text-center text-muted py-5">Belum ada data jenis sampah.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -66,40 +116,40 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal Form Tambah Sampah -->
-    <div class="modal fade" id="modalSampah" data-bs-backdrop="static" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title fw-bold">Form Tambah Jenis Sampah</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form action="{{ route('admin.sampah.store') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-muted">ID Jenis (Format: J00X)</label>
-                            <input type="text" name="id_jenis" class="form-control" placeholder="Contoh: J001" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-muted">Nama Sampah</label>
-                            <input type="text" name="nama_sampah" class="form-control" placeholder="Contoh: Plastik Bening" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-muted">Harga Per Kilogram (Rp)</label>
-                            <input type="number" name="harga_perkg" class="form-control" placeholder="Contoh: 3000" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer border-0">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success px-4">Simpan</button>
-                    </div>
-                </form>
+<div class="modal fade" id="modalSampah" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4 shadow-lg">
+            <div class="modal-header text-white border-0 p-4" style="background-color: #0c231a; border-top-left-radius: 16px; border-top-right-radius: 16px;">
+                <h5 class="modal-title fw-bold">Form Tambah Jenis Sampah</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
+            <form action="{{ route('admin.sampah.store') }}" method="POST">
+                @csrf
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">ID Jenis (Format: J00X)</label>
+                        <input type="text" name="id_jenis" class="form-control rounded-3" placeholder="Contoh: J001" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Nama Sampah</label>
+                        <input type="text" name="nama_sampah" class="form-control rounded-3" placeholder="Contoh: Plastik Bening" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-muted">Harga Per Kilogram (Rp)</label>
+                        <input type="number" name="harga_perkg" class="form-control rounded-3" placeholder="Contoh: 3000" required>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4 pt-0">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white rounded-pill px-4 fw-medium" style="background-color: #0c231a;">Simpan Data</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

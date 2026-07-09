@@ -11,7 +11,7 @@ class Admin extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['id_admin', 'email', 'password'];
+    protected $fillable = ['id_admin','nama', 'email', 'password'];
 
     public function transaksi()
     {

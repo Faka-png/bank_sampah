@@ -23,21 +23,35 @@ class AuthController extends Controller
         ]);
 
         $role = $request->role;
-        $credentials = $request->username; // Mengambil input dari form (bisa berisi email)
+        $credentials = $request->username; 
         $password = $request->password; 
 
         if ($role == 'pengguna') {
             $warga = DB::table('warga')->where('email', $credentials)->where('password', $password)->first();
+            
             if ($warga) {
-                session(['id_warga' => $warga->id_warga, 'nama' => $warga->nama, 'role' => 'pengguna']);
+                // PERBAIKAN: Gunakan key session yang spesifik untuk warga ('nama_warga')
+                session([
+                    'id_warga'   => $warga->id_warga, 
+                    'nama_warga' => $warga->nama, // Spesifik untuk warga
+                    'role'       => 'pengguna'
+                ]);
+                
                 return redirect()->route('warga.dashboard')->with('success', "Halo {$warga->nama}, Login Berhasil!");
             }
+            
         } elseif ($role == 'admin') {
-            // PERBAIKAN: Mengubah 'username' menjadi 'email' agar sesuai dengan kolom di database
             $admin = DB::table('admin')->where('email', $credentials)->where('password', $password)->first();
+            
             if ($admin) {
-                // Sesuaikan session untuk menyimpan 'email', bukan 'username'
-                session(['id_admin' => $admin->id_admin, 'email' => $admin->email, 'role' => 'admin']);
+                // PERBAIKAN: Gunakan key session yang spesifik untuk admin ('nama_admin')
+                session([
+                    'id_admin'   => $admin->id_admin, 
+                    'nama_admin' => $admin->nama, // Spesifik untuk admin
+                    'email'      => $admin->email, 
+                    'role'       => 'admin'
+                ]);
+                
                 return redirect()->route('admin.dashboard')->with('success', 'Login Admin Berhasil!');
             }
         }
