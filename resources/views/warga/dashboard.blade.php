@@ -55,10 +55,6 @@
                 </div>
             </div>
         </div>
-
-        @if(session('success'))
-            <div class="alert alert-success border-0 shadow-sm rounded-4 mb-4">{{ session('success') }}</div>
-        @endif
         
         @if(session('status') == 'sukses')
             <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
