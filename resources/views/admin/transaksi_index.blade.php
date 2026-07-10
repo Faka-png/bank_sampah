@@ -63,7 +63,7 @@
                     </div>
                     <div>
                         <p class="mb-0 fw-bold lh-1 text-dark" style="font-size: 14px;">{{ session('nama_admin') }}</p>
-                        <small class="text-muted" style="font-size: 12px;">Anggota Nasabah Aktif</small>
+                        <small class="text-muted" style="font-size: 12px;">Admin bank Sampah Aktif</small>
                     </div>
                 </div>
             </div>
